@@ -59,8 +59,12 @@
                 $password = $database['password'];
                 $charset  = $database['charset'];
                 $options  = $database['options'];
-                $dsn      = $engine.':dbname='.$name.";host=".$host.";charset=".$charset;
-                
+
+                $dsn      = $engine.':dbname='.$name.';host='.$host;
+                if ($engine === 'mysql') {
+                    $dsn .= ';charset='.$charset;
+                }
+
                 if (array_key_exists($connectionName, $this->connections)) {
                     return $this->connections[$connectionName];
                 }
